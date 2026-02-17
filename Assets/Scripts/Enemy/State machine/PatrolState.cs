@@ -1,18 +1,26 @@
 using UnityEngine;
+using Game.NavigationTutorial;
 
 public class PatrolState : BaseState<MerceneryState>
 {
     MerceneryStateMachine npc;
     GameObject marker;
+    NPCWander wanderLogic;
 
     public PatrolState(MerceneryStateMachine stateMachine) 
         : base(MerceneryState.Patrol)
     {
         npc = stateMachine;
+        
+        // Find the component once
+        wanderLogic = npc.GetComponent<NPCWander>();
     }
 
     public override void EnterState()
     {
+       // Start the wandering logic
+        if (wanderLogic != null) wanderLogic.enabled = true;
+
         marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         marker.transform.SetParent(npc.transform);
         marker.transform.localPosition = Vector3.up * 3f;
@@ -32,6 +40,10 @@ public class PatrolState : BaseState<MerceneryState>
 
     public override void ExitState()
     {
+        // Stop the wandering logic
+        if (wanderLogic != null) wanderLogic.enabled = false;
+        
+
         if (marker != null)
             GameObject.Destroy(marker);
     }

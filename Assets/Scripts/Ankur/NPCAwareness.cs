@@ -25,13 +25,20 @@ public class NPCAwareness : MonoBehaviour
 
     float lastSeenDistance = Mathf.Infinity;
 
-    public void IncreaseAwareness(float distance)
+
+     // ... existing variables ...
+    
+    [HideInInspector] 
+    public Vector3 lastKnownPosition; // 🔹 Store the world position here
+
+
+        public void IncreaseAwareness(float distance, Vector3 targetPos) // 🔹 Added parameter
     {
         lastSeenDistance = distance;
+        lastKnownPosition = targetPos; // 🔹 Save the position!
 
         float rate = GetIncreaseRate(distance);
         awareness += rate * Time.deltaTime;
-
         awareness = Mathf.Clamp(awareness, 0f, maxAwareness);
 
         Debug.Log($"👁️ AWARENESS ↑ | {awareness:F1} | Distance: {distance:F1}");
