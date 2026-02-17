@@ -8526,10 +8526,10 @@ MonoBehaviour:
   eyeHeight: 1.6
   targetMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
 --- !u!114 &553792840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21704,10 +21704,10 @@ MonoBehaviour:
   eyeHeight: 1.6
   targetMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
 --- !u!114 &1233534851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48438,10 +48438,10 @@ MonoBehaviour:
   eyeHeight: 1.6
   targetMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
 --- !u!114 &8372108695710791361
 MonoBehaviour:
   m_ObjectHideFlags: 0
