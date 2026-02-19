@@ -5,14 +5,22 @@ public class AgroState : BaseState<MerceneryState>
     MerceneryStateMachine npc;
     GameObject marker;
 
+    private AgroStateMachine agroStateMachine;//AgroStateMachine script pull refference, it's stored in the variable named agroStateMachine
+
     public AgroState(MerceneryStateMachine stateMachine)
         : base(MerceneryState.Agro)
     {
         npc = stateMachine;
+        agroStateMachine = npc.GetComponent<AgroStateMachine>();//Find the AgroStateMachine component on the NPC
     }
 
     public override void EnterState()
     {
+        if (agroStateMachine != null)//Enabling AgroStateMachine when entering Agro state
+        {
+            agroStateMachine.enabled = true;
+        }
+
         marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         marker.transform.SetParent(npc.transform);
         marker.transform.localPosition = Vector3.up * 3f;
@@ -31,6 +39,11 @@ public class AgroState : BaseState<MerceneryState>
 
     public override void ExitState()
     {
+        if (agroStateMachine != null)//Disabling AgroStateMachine when exiting Agro state
+        {
+            agroStateMachine.enabled = false;
+        }
+
         if (marker != null)
             GameObject.Destroy(marker);
     }
