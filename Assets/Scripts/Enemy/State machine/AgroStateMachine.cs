@@ -8,14 +8,18 @@ public enum AggressiveState
     Heal,
     Die
 }
+
 public class AgroStateMachine : StateManager<AggressiveState>
 {
     public NavMeshAgent Agent; 
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [HideInInspector] public CombatController Combat; //  Reference to the body
+    [HideInInspector] public MerceneryStateMachine ParentMachine; // Reference to global data
+
     void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
+        Combat = GetComponent<CombatController>();
+        ParentMachine = GetComponent<MerceneryStateMachine>();
 
         States.Add(AggressiveState.Attack, new AttackState(this));
         States.Add(AggressiveState.Reload, new ReloadState(this));
@@ -23,13 +27,20 @@ public class AgroStateMachine : StateManager<AggressiveState>
         States.Add(AggressiveState.Die, new DieState(this));
 
         CurrentState = States[AggressiveState.Attack];
-        
+        Combat.OnAmmoEmptyEvent += () => TransitionToState(AggressiveState.Reload);
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        
+        if (CurrentState == null) return;
+
+        CurrentState.UpdateState();
+
+        AggressiveState nextState = CurrentState.GetNextState();
+        if (nextState != CurrentState.StateKey)
+        {
+            TransitionToState(nextState);
+        }
     }
 }
-
