@@ -15,6 +15,7 @@ public class MerceneryStateMachine : StateManager<MerceneryState>
 
     public NavMeshAgent Agent; 
     public Vector3 LastKnownPosition; // For Suspicious state movement
+    public Transform Target => awareness != null ? awareness.currentTarget : null;
     
 
     void Awake()

@@ -29,13 +29,26 @@ public class NPCAwareness : MonoBehaviour
      // ... existing variables ...
     
     [HideInInspector] 
-    public Vector3 lastKnownPosition; // 🔹 Store the world position here
+    public Vector3 lastKnownPosition; //  Store the world position here
+    [HideInInspector] public Transform currentTarget;//I am storing the actual object here
 
 
-        public void IncreaseAwareness(float distance, Vector3 targetPos) // 🔹 Added parameter
+    public void IncreaseAwareness(float distance, Vector3 targetPos) // 🔹 Added parameter
     {
         lastSeenDistance = distance;
         lastKnownPosition = targetPos; // 🔹 Save the position!
+
+        float rate = GetIncreaseRate(distance);
+        awareness += rate * Time.deltaTime;
+        awareness = Mathf.Clamp(awareness, 0f, maxAwareness);
+
+        Debug.Log($"👁️ AWARENESS ↑ | {awareness:F1} | Distance: {distance:F1}");
+    }
+
+    public void IncreaseAwareness(float distance, Transform target) // 🔹 Added parameter
+    {
+        currentTarget = target;
+        lastKnownPosition = target.position; // 🔹 Save the position!
 
         float rate = GetIncreaseRate(distance);
         awareness += rate * Time.deltaTime;

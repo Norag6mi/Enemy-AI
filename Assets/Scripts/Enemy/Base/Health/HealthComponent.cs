@@ -8,6 +8,8 @@ public class HealthComponent : MonoBehaviour
 
     public System.Action OnDeathEvent;
 
+    public bool IsHealing => Model.IsHealing;//to check healing state in my state machine
+
     private void Awake()
     {
         Model = new HealthModel(maxHealth);

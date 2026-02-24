@@ -73,7 +73,7 @@ public class NPCVision : MonoBehaviour
 
                     if (awareness != null)
                     {
-                        awareness.IncreaseAwareness(distanceToTarget, target.transform.position);
+                        awareness.IncreaseAwareness(distanceToTarget, target.transform);//awareness.IncreaseAwareness(distanceToTarget, target.transform.position);
                     }
 
                     Debug.DrawRay(

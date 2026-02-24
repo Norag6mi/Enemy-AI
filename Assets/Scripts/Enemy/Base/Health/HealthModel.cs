@@ -13,7 +13,8 @@ public class HealthModel
    
 
     //heal logic
-    public bool IsHealing { get; private set; }
+    public bool IsHealing { get; private set; }//to check healing state in my state machine
+
     public event Action OnHealStarted;
     public event Action OnHealFinished;
 

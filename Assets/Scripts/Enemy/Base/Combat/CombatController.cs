@@ -15,6 +15,12 @@ public class CombatController : MonoBehaviour
     private bool isDead;
     public System.Action OnDeathEvent;
 
+    public bool IsHealing()
+{
+    // Ensure you have a reference to your HealthComponent
+    return health.IsHealing; 
+}
+
 
     private void Awake()
     {

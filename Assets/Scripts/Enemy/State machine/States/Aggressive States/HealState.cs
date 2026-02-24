@@ -22,7 +22,7 @@ public class HealState : BaseState<AggressiveState>
     {
         if (agroMachine.Combat.IsDead()) return AggressiveState.Die;
 
-        // Logic here to return to Attack after healing is done
+        if (!agroMachine.Combat.IsHealing()) return AggressiveState.Attack;
        
         return AggressiveState.Heal; 
     }
