@@ -29,6 +29,12 @@ public class SuspiciousState : BaseState<MerceneryState>
     public override void ExitState()
     {
         CleanupVisuals();
+
+        if (npc.Agent != null && npc.Agent.isOnNavMesh)
+        {
+            npc.Agent.ResetPath(); // Stop moving to the investigation spot
+        }
+        
     }
 
     // --- Core Logic Functions ---

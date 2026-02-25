@@ -16,6 +16,12 @@ public class AgroState : BaseState<MerceneryState>
 
     public override void EnterState()
     {
+        if (npc.Agent != null)
+        {
+            npc.Agent.ResetPath(); //  This kills the "Suspicious" movement immediately
+            npc.Agent.velocity = Vector3.zero; //  Stops the sliding/drifting
+        }
+
         if (agroStateMachine != null)//Enabling AgroStateMachine when entering Agro state
         {
             agroStateMachine.enabled = true;
